@@ -14,7 +14,3 @@
 * [Slack](https://slack.com/downloads/mac)
 * [Sublime](https://www.sublimetext.com/)
 * [Keybase](https://keybase.io/download)
-
-
-## oh my zsh
-
