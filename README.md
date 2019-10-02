@@ -1,11 +1,11 @@
 # dotfiles
 
-## CLI
-* use [new.sh](https://github.com/jrmeier/dotfiles/)
+## Instructions
+
+* clone this repo
+* run `./setup.sh`
 
 ## Apps
-* [oh my zsh](https://github.com/robbyrussell/oh-my-zsh)    
-    * `sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"`
 * [Spectacle](https://www.spectacleapp.com/)
 * [VS Code](https://code.visualstudio.com/)
 * [Spotify](https://www.spotify.com/us/download/mac)
