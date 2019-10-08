@@ -1,17 +1,20 @@
-# install brew
+# brew
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
-# install oh my zsh
+# oh my zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
+# go
+brew install go
+echo "export PATH=$PATH:(go env GOPATH)/bin " >> "~/.zshrc"
+
+# iterm2
 brew cask install iterm2
 
-#pyenv
+# pyenv
 brew install pyenv
 
-
-#NVM
+# nvm
 brew install nvm
 mkdir ~/.nvm
-echo "export NVM_DIR=~/.nvm" >> ".zshrc"
-
+echo "export NVM_DIR=~/.nvm" >> "~/.zshrc"

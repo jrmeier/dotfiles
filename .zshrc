@@ -112,9 +112,5 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
 [ -s "/usr/local/opt/nvm/etc/bash_completion" ] && . "/usr/local/opt/nvm/etc/bash_completion"  # This loads nvm bash_completion
 
-
-export PATH="$PATH:$HOME/.pyenv/bin"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
-pyenv global 3.7.4 2.7.16
+alias ggl="git for-each-ref --sort=committerdate refs/heads/ --count=10 --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))"
 
