@@ -114,3 +114,8 @@ export NVM_DIR="$HOME/.nvm"
 
 alias ggl="git for-each-ref --sort=committerdate refs/heads/ --count=10 --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))"
 
+
+# helpers
+killPort () {
+	lsof -i tcp:$1 | awk '{print $2}' | grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn} -v 'PID' | xargs kill
+}
