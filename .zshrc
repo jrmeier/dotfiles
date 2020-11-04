@@ -69,18 +69,17 @@ ZSH_THEME="ys"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  git
-  bundler
   dotenv
   osx
-  rake
-  rbenv
-  ruby
 )
 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
+
+# NO SHARED HISTORY
+unsetopt inc_append_history
+unsetopt share_history
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -106,16 +105,41 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-
 # NVM
 export NVM_DIR="$HOME/.nvm"
 [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
 [ -s "/usr/local/opt/nvm/etc/bash_completion" ] && . "/usr/local/opt/nvm/etc/bash_completion"  # This loads nvm bash_completion
 
-alias ggl="git for-each-ref --sort=committerdate refs/heads/ --count=10 --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))"
+if [ -f $HOME/google-cloud-sdk/path.zsh.inc ]; then source $HOME/google-cloud-sdk/path.zsh.inc; fi
+if [ -f $HOME/google-cloud-sdk/completion.zsh.inc ]; then source $HOME/google-cloud-sdk/completion.zsh.inc; fi
+if [ -d $HOME/google-cloud-sdk/platform/google_appengine ]; then
+  export GAE_LIB_ROOT=$HOME/google-cloud-sdk/platform/google_appengine
+  export GAE_PYTHONPATH="$GAE_PYTHONPATH:$GAE_LIB_ROOT"
+fi
 
 
-# helpers
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '$HOME/google-cloud-sdk/path.zsh.inc' ]; then . '$HOME/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '$HOME/google-cloud-sdk/completion.zsh.inc' ]; then . '$HOME/google-cloud-sdk/completion.zsh.inc'; fi
+
+export GOOGLE_APPLICATION_CREDENTIALS='/Users/jedmeier/.config/gcloud/application_default_credentials.json'
+export LDFLAGS="-L/usr/local/opt/openssl/lib"
+export CPPFLAGS="-I/usr/local/opt/openssl/include"
+export PATH="$PATH:$HOME/.pyenv/bin:$HOME/Projects/pygain-cli/bin"
+export PATH="$PATH:$HOME/Projects/pygain-lib/bin"
+eval "$(pyenv init -)"
+alias "ggl=git for-each-ref --sort=committerdate refs/heads/ --count=10 --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'"
+alias "run-api=pygain-cli --vagrant api run --all"
+
+alias "clean_py = find . -type d -name  "__pycache__" -exec rm -r {} +"
+
+pyclean() {
+  eval "find . -type d -name  "__pycache__" -exec rm -r {} +"
+}
+
 killPort () {
 	lsof -i tcp:$1 | awk '{print $2}' | grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn} -v 'PID' | xargs kill
 }
+
